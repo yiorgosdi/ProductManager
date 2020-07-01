@@ -1,6 +1,3 @@
-<!-- http://localhost:8084/ -->
-<!-- http://localhost:8079/ -->
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -20,6 +17,7 @@
                 <th>Brand</th>
                 <th>Made In</th>
                 <th>Price</th>
+                <th>Photo</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -31,11 +29,14 @@
                 <td th:text="${product.madein}">Made in</td>
                 <td th:text="${product.price}">Price</td>
                 <td>
+                	<img th:src="@{${product.productPhotoPath}}" style="width: 100px">
+                </td> 
+                <td>
                     <a th:href="@{'/edit/' + ${product.id}}">Edit</a>
                  	&nbsp;&nbsp;&nbsp;
                     <a th:href="@{'/delete/' + ${product.id}}">Delete</a>     
                 </td>                 
-              </tr>
+             </tr>
         </tbody>
     </table>
 </div>   

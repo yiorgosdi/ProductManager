@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<head>
+<meta charset="ISO-8859-1">
+<title>Edit product</title> 
+</head>
+<body>
+	<div align="center"> 
+		<h1>Edit product</h1>
+		<br/> 
+		<form action="#" th:action="@{/save}" th:object="${product}" method="post" enctype="multipart/form-data"> 
+		
+		<table border="0" cellpadding="10">
+		<tr> 
+			<td>Product ID:</td>
+			<td><input type="text" th:field="*{id}" readonly="readonly" /> </td>  
+		</tr>
+		<tr> 
+			<td>Product Name:</td>
+			<td><input type="text" th:field="*{name}" /> </td>  
+		</tr>
+		<tr> 
+			<td>Brand</td>
+			<td><input type="text" th:field="*{brand}" /> </td>  
+		</tr>
+		<tr> 
+			<td>Made in:</td>
+			<td><input type="text" th:field="*{madein}" /> </td>  
+		</tr>
+		<tr> 
+			<td>Price:</td>
+			<td><input type="text" th:field="*{price}" /> </td>  
+		</tr>
+		<tr> 
+		<td colspan="2"><button type="submit">Save</button></td> 
+		</tr> 
+		
+		<tr>
+		<td>Product image:</td>
+ 		<td><input id="imageFile" type="file" name="imageFile" accept="image/*" /></td> 
+ 		</tr>
+ 		<tr>
+ 		<td colspan="2" style="width:100%"><img id="thumbnail" alt="Logo Preview" /></td>
+		</tr>
+		
+		</table> 
+		</form> 
+			
+<script type="text/javascript"> 
+	$(document).ready(function() {
+		
+		$("#imageFile").change(function () {
+			onThumbnailChange(this);
+		$("#form").submit();
+		});
+	});
+		
+		function onThumbnailChange(fileInput) {
+		var file = event.target.files[0];
+		reader = new FileReader(); 
+		
+		reader.onload = function(e) {
+			$('#thumbnail').attr('src', e.target.result); 
+		}; 
+		
+		reader.readAsDataURL(file);  		
+	}
+</script>
+
+	</div>
+</body>
+</html>

@@ -1,24 +1,41 @@
 package net.codejava;
 
+import java.beans.Transient;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity 
+@Table(name="product")
 public class Product {
 		
+	@Id 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id; 
+	
+	@Column(length=45, nullable=false, unique=false)
 	private String name; 
+	
+	@Column(length=45, nullable=false, unique=false)
 	private String brand; 
+	
+	@Column(length=45, nullable=false, unique=false)
 	private String madein;
+	
+	@Column(nullable=false, unique=false)
 	private float price;
+	
+	@Column(name = "product_photo", length=245, nullable=true)
+	private String productphoto; 
 
 	protected Product() {
 	}
 	
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
 	public Long getId() {
 		return id;
 	}
@@ -49,5 +66,19 @@ public class Product {
 	public void setPrice(float price) {
 		this.price = price;
 	}
-	  	  
+
+ 	public String getProductphoto() {
+		return productphoto;
+	}
+
+	public void setProductphoto(String productphoto) {
+		this.productphoto = productphoto;
+	}  
+	
+	@Transient 
+	public String getProductPhotoPath() {
+		if (productphoto == null || id == null) return null;
+		
+		return "/product-photos/" + id + "/" + productphoto; 
+	}
 }
